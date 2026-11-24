@@ -1,0 +1,5 @@
+2026-11-24T00:58:27Z START deploy payments 1.1.0
+2026-11-24T01:13:39Z OUTAGE docker compose stop payments
+2026-11-24T01:15:50Z RECOVER docker compose start payments (still 1.1.0)
+2026-11-24T01:20:51Z ROLLBACK payments 1.0.0
+2026-11-24T01:21:03Z DONE (wait 2-3 more minutes, then collect the evidence)

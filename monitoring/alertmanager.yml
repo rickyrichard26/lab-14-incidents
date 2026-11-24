@@ -1,0 +1,21 @@
+# FINAL routing for Task 3
+route:
+  receiver: tickets
+  group_by: [alertname, job]   # one notification per alert and service, not per label combination
+  group_wait: 30s              # wait a little so related alerts arrive in one message
+  group_interval: 5m           # new alerts joining a group are sent at most every 5 minutes
+  repeat_interval: 4h          # reminder only every 4 hours, not every minute
+  routes:
+    - matchers:
+        - severity="page"
+      receiver: pager
+      repeat_interval: 1h
+receivers:
+  - name: pager
+    webhook_configs:
+      - url: http://webhook:8080/pager
+        send_resolved: true
+  - name: tickets
+    webhook_configs:
+      - url: http://webhook:8080/tickets
+        send_resolved: true
